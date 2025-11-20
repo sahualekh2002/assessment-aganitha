@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TinyLink - Stats</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>📊 Link Statistics</h1>
+
+    <div class="card" id="statsCard">
+        <h2 id="codeTitle"></h2>
+        <p><strong>Original URL:</strong> <span id="longUrl"></span></p>
+        <p><strong>Total Clicks:</strong> <span id="clicks"></span></p>
+        <p><strong>Last Clicked:</strong> <span id="lastClicked"></span></p>
+        <p><strong>Created At:</strong> <span id="createdAt"></span></p>
+
+        <button onclick="goBack()">⬅ Back to Dashboard</button>
+        <button onclick="copyShortUrl()">Copy URL</button>
+    </div>
+
+</div>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get("code");
+
+    fetch(`/api/links/${code}`)
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("codeTitle").innerText = "Code: " + data.code;
+            document.getElementById("longUrl").innerText = data.long_url;
+            document.getElementById("clicks").innerText = data.clicks;
+            document.getElementById("lastClicked").innerText = data.last_clicked || "Never";
+            document.getElementById("createdAt").innerText = data.created_at;
+        });
+
+    function goBack() {
+        window.location.href = "/";
+    }
+
+    function copyShortUrl() {
+        const shortUrl = window.location.origin + "/" + code;
+        navigator.clipboard.writeText(shortUrl);
+        alert("Copied: " + shortUrl);
+    }
+</script>
+
+</body>
+</html>

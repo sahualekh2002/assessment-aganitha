@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TinyLink - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🔗 TinyLink URL Shortener</h1>
+
+    <!-- Create Link Form -->
+    <div class="card">
+        <h2>Create New Short Link</h2>
+
+        <input type="text" id="longUrl" placeholder="Enter long URL...">
+        <input type="text" id="customCode" placeholder="Custom short code (optional)">
+        <button onclick="createLink()">Create Link</button>
+
+        <div id="message" class="message"></div>
+    </div>
+
+    <!-- Links Table -->
+    <div class="card">
+        <h2>Your Short Links</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Long URL</th>
+                    <th>Clicks</th>
+                    <th>Last Clicked</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="linksTable"></tbody>
+        </table>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
